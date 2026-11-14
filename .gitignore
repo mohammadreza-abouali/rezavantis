@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local backups and generated archives
+/backups/
+/rezavantis-source.zip
+/intelligence-source-review.txt
+
+# Local timestamped backup files
+*.backup-*

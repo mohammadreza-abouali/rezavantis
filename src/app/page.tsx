@@ -1,69 +1,154 @@
-import Image from "next/image";
+import {
+  AirVent,
+  ArrowUpRight,
+  CloudSun,
+  Globe2,
 
-export default function Home() {
+  Map,
+  RadioTower,
+  Sparkles,
+} from "lucide-react";
+import Link from "next/link";
+import { CitySearch } from "@/components/search/CitySearch";
+import WeatherOverview from "@/components/weather/WeatherOverview";
+
+const modules = [
+  {
+    title: "Forecast",
+    description: "Explore hourly conditions and extended atmospheric outlooks.",
+    href: "/forecast",
+    icon: CloudSun,
+    number: "01",
+  },
+  {
+    title: "3D Atmosphere",
+    description: "Explore atmospheric systems through a spatial perspective.",
+    href: "/atmosphere",
+    icon: Globe2,
+    number: "02",
+  },
+  {
+    title: "Radar & Maps",
+    description: "A dedicated workspace for atmospheric maps and radar layers.",
+    href: "/radar",
+    icon: Map,
+    number: "03",
+  },
+  {
+    title: "Air Quality",
+    description:
+      "Understand air quality, particulate matter and UV conditions.",
+    href: "/air-quality",
+    icon: AirVent,
+    number: "04",
+  },
+  {
+    title: "Intelligence",
+    description:
+      "Discover patterns, trends and meaningful atmospheric insights.",
+    href: "/intelligence",
+    icon: Sparkles,
+    number: "05",
+  },
+  {
+    title: "My Places",
+    description: "Build a personal collection of locations around the world.",
+    href: "/places",
+    icon: RadioTower,
+    number: "06",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="overview-page">
+      <section className="overview-hero">
+        <div className="hero-copy">
+          <span className="eyebrow">
+            <span className="eyebrow-line" /> ATMOSPHERIC INTELLIGENCE PLATFORM
+          </span>
+          <h1>
+            Beyond Weather.
+            <br />
+            <em>Into Atmosphere.</em>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p>
+            A deeper perspective on the forces shaping our atmosphere. Explore
+            the science behind every shift, pattern and possibility.
           </p>
+          <div className="hero-actions">
+            <Link href="/atmosphere" className="primary-action">
+              Explore 3D atmosphere <ArrowUpRight size={17} />
+            </Link>
+            <span className="hero-note">A NEW PERSPECTIVE ON OUR PLANET</span>
+          </div>
+          <div className="overview-search">
+            <span className="overview-search-label">EXPLORE A LOCATION</span>
+            <CitySearch />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="hero-visual">
+          <div className="hero-visual-orbit orbit-a" />
+          <div className="hero-visual-orbit orbit-b" />
+          <div className="hero-globe">
+            <div className="globe-shine" />
+            <div className="globe-continent continent-a" />
+            <div className="globe-continent continent-b" />
+            <div className="globe-atmosphere" />
+          </div>
+          <span className="visual-coordinate coordinate-a">GLOBAL VIEW</span>
+          <span className="visual-coordinate coordinate-b">
+            ATMOSPHERIC SYSTEM / 001
+          </span>
+          <span className="visual-crosshair">+</span>
         </div>
-      </main>
+
+        <div className="hero-bottom-line">
+          <span>ATMOSPHERE IS ALWAYS IN MOTION</span>
+          <span>SCIENCE · DATA · PERSPECTIVE</span>
+        </div>
+      </section>
+
+      <WeatherOverview />
+
+      <section className="modules-section">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">THE PLATFORM</span>
+            <h2>Explore the dimensions</h2>
+          </div>
+          <span className="section-index">06 MODULES / ONE PLATFORM</span>
+        </div>
+
+        <div className="module-grid">
+          {modules.map((module) => {
+            const Icon = module.icon;
+            return (
+              <Link
+                href={module.href}
+                key={module.href}
+                className="module-card"
+              >
+                <div className="module-card-top">
+                  <span className="module-number">{module.number}</span>
+                  <Icon size={21} strokeWidth={1.5} />
+                </div>
+                <h3>{module.title}</h3>
+                <p>{module.description}</p>
+                <span className="module-card-arrow">
+                  <ArrowUpRight size={17} />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <footer className="platform-footer">
+        <span>REZAVANTIS © 2026</span>
+        <span>BEYOND WEATHER. INTO ATMOSPHERE.</span>
+      </footer>
     </div>
   );
 }
