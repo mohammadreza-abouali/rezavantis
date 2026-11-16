@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -589,7 +589,8 @@ export default function AtmosphericGlobe({
     rimLight.position.set(-2, -2, 1);
     scene.add(rimLight);
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     let animationFrame = 0;
     let isVisible = true;
 
@@ -622,10 +623,12 @@ export default function AtmosphericGlobe({
     const animate = () => {
       animationFrame = requestAnimationFrame(animate);
 
+      timer.update();
+
       if (!isVisible) return;
 
-      const delta = Math.min(clock.getDelta(), 0.05);
-      const elapsed = clock.elapsedTime;
+      const delta = Math.min(timer.getDelta(), 0.05);
+      const elapsed = timer.getElapsed();
       
       if (cinematicRef.current) {
         const approachProgress = reducedMotion
@@ -760,6 +763,7 @@ export default function AtmosphericGlobe({
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       document.removeEventListener("visibilitychange", visibilityHandler);
+      timer.dispose();
 
       scene.traverse((object) => {
         if (object instanceof THREE.Mesh || object instanceof THREE.Points) {

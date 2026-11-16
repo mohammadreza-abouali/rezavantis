@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -231,12 +231,14 @@ export function EarthLoader() {
     ).matches;
 
     let animationId = 0;
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
 
-      const elapsed = clock.getElapsedTime();
+      timer.update();
+      const elapsed = timer.getElapsed();
 
       if (!reducedMotion) {
         earth.rotation.y = elapsed * 0.105;
@@ -265,6 +267,7 @@ export function EarthLoader() {
     return () => {
       cancelAnimationFrame(animationId);
       resizeObserver.disconnect();
+      timer.dispose();
 
       earthGeometry.dispose();
       earthMaterial.dispose();
